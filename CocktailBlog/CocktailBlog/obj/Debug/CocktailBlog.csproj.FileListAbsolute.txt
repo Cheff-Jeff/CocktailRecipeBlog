@@ -1,0 +1,9 @@
+C:\Users\1999j\Documents\School\CocktailRecipeBlog\CocktailBlog\CocktailBlog\bin\Debug\CocktailBlog.exe.config
+C:\Users\1999j\Documents\School\CocktailRecipeBlog\CocktailBlog\CocktailBlog\bin\Debug\CocktailBlog.exe
+C:\Users\1999j\Documents\School\CocktailRecipeBlog\CocktailBlog\CocktailBlog\bin\Debug\CocktailBlog.pdb
+C:\Users\1999j\Documents\School\CocktailRecipeBlog\CocktailBlog\CocktailBlog\obj\Debug\CocktailBlog.csproj.AssemblyReference.cache
+C:\Users\1999j\Documents\School\CocktailRecipeBlog\CocktailBlog\CocktailBlog\obj\Debug\CocktailBlog.Properties.Resources.resources
+C:\Users\1999j\Documents\School\CocktailRecipeBlog\CocktailBlog\CocktailBlog\obj\Debug\CocktailBlog.csproj.GenerateResource.cache
+C:\Users\1999j\Documents\School\CocktailRecipeBlog\CocktailBlog\CocktailBlog\obj\Debug\CocktailBlog.csproj.CoreCompileInputs.cache
+C:\Users\1999j\Documents\School\CocktailRecipeBlog\CocktailBlog\CocktailBlog\obj\Debug\CocktailBlog.exe
+C:\Users\1999j\Documents\School\CocktailRecipeBlog\CocktailBlog\CocktailBlog\obj\Debug\CocktailBlog.pdb
