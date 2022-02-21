@@ -28,7 +28,5 @@ namespace CocktailBlog
             Tools = CocktailTools;
             Ingredients = CocktailIngredients;
         }
-
-
     }
 }
