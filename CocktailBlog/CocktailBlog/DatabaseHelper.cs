@@ -24,6 +24,7 @@ namespace CocktailBlog
     * get user
     * 
     * denken manier tools toevoegen.
+    * denken manier favoriete cocktails.
     * 
     */
 
@@ -139,9 +140,32 @@ namespace CocktailBlog
             }
         }
 
+        //Todo Return.
         public void GetCocktails(int userID)
         {
-            
+            userID = 1;
+            query = "SELECT * FROM Cocktails WHERE (@ID)";
+
+            try
+            {
+                OpenDbConnenction();
+
+                cmd = new SqlCommand(query, cnn);
+
+                cmd.Parameters.AddWithValue("@ID", userID);
+
+                cmd.ExecuteNonQuery();
+
+                CloseDbConnection();
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine("Inner Exception: " + ex.Message);
+                Console.WriteLine();
+                Console.WriteLine("Query Executed: " + query);
+                Console.WriteLine();
+                throw;
+            }
         }
 
         public void GetCocktail(int cocktailId)
