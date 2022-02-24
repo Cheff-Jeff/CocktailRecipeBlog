@@ -28,9 +28,9 @@ namespace CocktailBlog
     * 
     */
 
-    class DatabaseHelper
+    public class DatabaseHelper
     {
-        private string connenctionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\1999j\Documents\School\CocktailRecipeBlog\CocktailBlog\CocktailBlog\CocktailBlogDB.mdf;Integrated Security=True";
+        private string connenctionString = @"Data Source=mssqlstud.fhict.local;Database=dbi483908;User Id=dbi483908;Password=Jeff@School#data;";
         private SqlConnection cnn;
         private string query;
         private SqlCommand cmd;
@@ -80,12 +80,9 @@ namespace CocktailBlog
             }
         }
 
-        public void UpdateCocktail(int CocktailId, string name, string desc, string img, string ingre)
+        public bool UpdateCocktail(int CocktailId, string name, string desc/*, string img, string ingre*/)
         {
-            CocktailId = 1;
-            int toolid = 1;
-            query = "UPDATE Cocktails (Name, Description, Photo, Ingredients, CocktailToolsId) " +
-                "VALUES (@name, @desc, @img, @ing, @toolID) WHERE Id = '" + CocktailId + "'";
+            query = "UPDATE Cocktails SET Name = @name, Description = @desc WHERE Id = (@CocktailId)";
 
             try
             {
@@ -95,13 +92,12 @@ namespace CocktailBlog
 
                 cmd.Parameters.AddWithValue("@name", name);
                 cmd.Parameters.AddWithValue("@desc", desc);
-                cmd.Parameters.AddWithValue("@img", img);
-                cmd.Parameters.AddWithValue("@ing", ingre);
-                cmd.Parameters.AddWithValue("@toolID", toolid);
+                cmd.Parameters.AddWithValue("@CocktailId", CocktailId);
 
                 cmd.ExecuteNonQuery();
 
                 CloseDbConnection();
+                return true;
             }
             catch (SqlException ex)
             {
@@ -110,13 +106,14 @@ namespace CocktailBlog
                 Console.WriteLine("Query Executed: " + query);
                 Console.WriteLine();
                 throw;
+                return false;
             }
         }
 
         public void DeleteCocktail(int CocktailId) 
         {
             CocktailId = 1;
-            query = "Delete FROM Cocktails WHERE (@ID)";
+            query = "Delete FROM Cocktails WHERE Id = (@ID)";
 
             try
             {
@@ -144,7 +141,7 @@ namespace CocktailBlog
         public void GetCocktails(int userID)
         {
             userID = 1;
-            query = "SELECT * FROM Cocktails WHERE (@ID)";
+            query = "SELECT * FROM Cocktails WHERE UserId = (@ID)";
 
             try
             {
@@ -168,9 +165,98 @@ namespace CocktailBlog
             }
         }
 
-        public void GetCocktail(int cocktailId)
+        public Cocktail GetCocktail(int cocktailId)
         {
+            Cocktail newCocktail;
 
+            string cocktailName = "";
+            string cocktailInfo = "";
+            string cocktailImg = "";
+            string cocktailIngrest = "";
+            string cocktailUserName = "";
+            int userId = 0;
+            string[] cocktailIngre = {""};
+            List<string> cocktailTools = new List<string>();
+
+            query = "SELECT * FROM Cocktails WHERE Id = (@ID)";
+            
+            try
+            {
+                OpenDbConnenction();
+
+                cmd = new SqlCommand(query, cnn);
+
+                cmd.Parameters.AddWithValue("@ID", cocktailId);
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        cocktailName = reader["Name"].ToString();
+                        cocktailInfo = reader["Description"].ToString();
+                        cocktailImg = reader["Photo"].ToString();
+                        cocktailIngrest = reader["Ingredients"].ToString();
+                        cocktailIngre = cocktailIngrest.Split(';');
+                        userId = Int32.Parse(reader["UserId"].ToString());
+                    }
+                }
+
+                query = "SELECT * FROM CocktailTools WHERE CocktailId = (@ID)";
+
+                cmd = new SqlCommand(query, cnn);
+                cmd.Parameters.AddWithValue("@ID", cocktailId);
+
+                List<int> tools = new List<int>();
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        tools.Add(Int32.Parse(reader["ToolId"].ToString()));
+                    }
+                }
+
+                for (int i = 0; i < tools.Count(); i++)
+                {
+                    query = "SELECT * FROM Tools WHERE Id = (@ID)";
+
+                    cmd = new SqlCommand(query, cnn);
+                    cmd.Parameters.AddWithValue("@ID", tools[i]);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            cocktailTools.Add(reader["Name"].ToString());
+                        }
+                    }
+                }
+
+                query = "SELECT FirstName, LastName FROM Users WHERE Id = (@ID)";
+
+                cmd = new SqlCommand(query, cnn);
+                cmd.Parameters.AddWithValue("@ID", userId);
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        cocktailUserName = $"{reader["FirstName"].ToString()} {reader["LastName"].ToString()}";
+                    }
+                }
+
+                CloseDbConnection();
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine("Inner Exception: " + ex.Message);
+                Console.WriteLine();
+                Console.WriteLine("Query Executed: " + query);
+                Console.WriteLine();
+                throw;
+            }
+
+            return newCocktail = new Cocktail(cocktailUserName, cocktailName, cocktailInfo, cocktailImg, cocktailTools, cocktailIngre);
         }
     }
 }

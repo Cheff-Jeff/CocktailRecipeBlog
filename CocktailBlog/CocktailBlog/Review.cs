@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CocktailBlog
 {
-    class Review
+    public class Review
     {
         public string UserName { get; private set; }
         public int Rating { get; private set; }

@@ -7,3 +7,7 @@ C:\Users\1999j\Documents\School\CocktailRecipeBlog\CocktailBlog\CocktailBlog\obj
 C:\Users\1999j\Documents\School\CocktailRecipeBlog\CocktailBlog\CocktailBlog\obj\Debug\CocktailBlog.csproj.CoreCompileInputs.cache
 C:\Users\1999j\Documents\School\CocktailRecipeBlog\CocktailBlog\CocktailBlog\obj\Debug\CocktailBlog.exe
 C:\Users\1999j\Documents\School\CocktailRecipeBlog\CocktailBlog\CocktailBlog\obj\Debug\CocktailBlog.pdb
+C:\Users\1999j\Documents\School\CocktailRecipeBlog\CocktailBlog\CocktailBlog\bin\Debug\CocktailBlogDB.mdf
+C:\Users\1999j\Documents\School\CocktailRecipeBlog\CocktailBlog\CocktailBlog\bin\Debug\CocktailBlogDB_log.ldf
+C:\Users\1999j\Documents\School\CocktailRecipeBlog\CocktailBlog\CocktailBlog\obj\Debug\CocktailBlog.CocktailView.resources
+C:\Users\1999j\Documents\School\CocktailRecipeBlog\CocktailBlog\CocktailBlog\obj\Debug\CocktailBlog.UpdateCocktail.resources
