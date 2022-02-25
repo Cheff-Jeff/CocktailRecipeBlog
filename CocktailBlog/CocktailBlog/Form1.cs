@@ -34,7 +34,7 @@ namespace CocktailBlog
                 LbTools.Items.Add(cocktail.Tools[i]);
             }
 
-            ImgCocktail.Image = Image.FromFile(cocktail.Image);
+            ImgCocktail.Load($"../../src/img/{cocktail.Image}");
 
             LblUserName.Text = cocktail.CreatorName;
         }

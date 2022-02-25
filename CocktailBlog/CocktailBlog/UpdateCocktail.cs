@@ -24,7 +24,7 @@ namespace CocktailBlog
             cocktailId = Id;
             TxtName.Text = cocktail.Name;
             TxtInfo.Text = cocktail.Description;
-            ImgCocktail.Image = Image.FromFile(cocktail.Image);
+            ImgCocktail.Load($"../../src/img/{cocktail.Image}");
         }
 
         private void BtnSave_Click(object sender, EventArgs e)
